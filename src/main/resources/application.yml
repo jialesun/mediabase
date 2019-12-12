@@ -1,7 +1,7 @@
 spring:
 
   datasource:
-    url: jdbc:mysql://localhost:3306/media?useSSL=false&user=root&password=password
+    url: jdbc:mysql://localhost:3306/media?useSSL=false&user=root&password=000315
 
   jpa:
     generate-ddl: true

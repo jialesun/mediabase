@@ -3,6 +3,6 @@ applications:
 - name: mediabase
   path: build/libs/mediabase-1.0-SNAPSHOT.war
   routes:
-  - route: <initials>-mediabase.apps.pcf.cpstraining.perficient.com
+  - route: cs-mediabase.apps.pcf.cpstraining.perficient.com
   services:
   - media-database
