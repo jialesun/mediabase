@@ -1,21 +1,6 @@
-/**
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- * <p/>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p/>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.example.mediabase.movies;
 
+import com.example.mediabase.moviesui.MovieUI;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,41 +17,41 @@ public class MoviesBean {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Movie find(Long id) {
-        return entityManager.find(Movie.class, id);
+    public MovieUI find(Long id) {
+        return entityManager.find(MovieUI.class, id);
     }
 
     @Transactional
-    public void addMovie(Movie movie) {
-        entityManager.persist(movie);
+    public void addMovie(MovieUI movieUI) {
+        entityManager.persist(movieUI);
     }
 
     @Transactional
-    public void editMovie(Movie movie) {
-        entityManager.merge(movie);
+    public void editMovie(MovieUI movieUI) {
+        entityManager.merge(movieUI);
     }
 
     @Transactional
-    public void deleteMovie(Movie movie) {
-        entityManager.remove(movie);
+    public void deleteMovie(MovieUI movieUI) {
+        entityManager.remove(movieUI);
     }
 
     @Transactional
     public void deleteMovieId(long id) {
-        Movie movie = entityManager.find(Movie.class, id);
-        deleteMovie(movie);
+        MovieUI movieUI = entityManager.find(MovieUI.class, id);
+        deleteMovie(movieUI);
     }
 
-    public List<Movie> getMovies() {
-        CriteriaQuery<Movie> cq = entityManager.getCriteriaBuilder().createQuery(Movie.class);
-        cq.select(cq.from(Movie.class));
+    public List<MovieUI> getMovies() {
+        CriteriaQuery<MovieUI> cq = entityManager.getCriteriaBuilder().createQuery(MovieUI.class);
+        cq.select(cq.from(MovieUI.class));
         return entityManager.createQuery(cq).getResultList();
     }
 
-    public List<Movie> findAll(int firstResult, int maxResults) {
-        CriteriaQuery<Movie> cq = entityManager.getCriteriaBuilder().createQuery(Movie.class);
-        cq.select(cq.from(Movie.class));
-        TypedQuery<Movie> q = entityManager.createQuery(cq);
+    public List<MovieUI> findAll(int firstResult, int maxResults) {
+        CriteriaQuery<MovieUI> cq = entityManager.getCriteriaBuilder().createQuery(MovieUI.class);
+        cq.select(cq.from(MovieUI.class));
+        TypedQuery<MovieUI> q = entityManager.createQuery(cq);
         q.setMaxResults(maxResults);
         q.setFirstResult(firstResult);
         return q.getResultList();
@@ -74,7 +59,7 @@ public class MoviesBean {
 
     public int countAll() {
         CriteriaQuery<Long> cq = entityManager.getCriteriaBuilder().createQuery(Long.class);
-        Root<Movie> rt = cq.from(Movie.class);
+        Root<MovieUI> rt = cq.from(MovieUI.class);
         cq.select(entityManager.getCriteriaBuilder().count(rt));
         TypedQuery<Long> q = entityManager.createQuery(cq);
         return (q.getSingleResult()).intValue();
@@ -83,8 +68,8 @@ public class MoviesBean {
     public int count(String field, String searchTerm) {
         CriteriaBuilder qb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Long> cq = qb.createQuery(Long.class);
-        Root<Movie> root = cq.from(Movie.class);
-        EntityType<Movie> type = entityManager.getMetamodel().entity(Movie.class);
+        Root<MovieUI> root = cq.from(MovieUI.class);
+        EntityType<MovieUI> type = entityManager.getMetamodel().entity(MovieUI.class);
 
         Path<String> path = root.get(type.getDeclaredSingularAttribute(field, String.class));
         Predicate condition = qb.like(path, "%" + searchTerm + "%");
@@ -95,17 +80,17 @@ public class MoviesBean {
         return entityManager.createQuery(cq).getSingleResult().intValue();
     }
 
-    public List<Movie> findRange(String field, String searchTerm, int firstResult, int maxResults) {
+    public List<MovieUI> findRange(String field, String searchTerm, int firstResult, int maxResults) {
         CriteriaBuilder qb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Movie> cq = qb.createQuery(Movie.class);
-        Root<Movie> root = cq.from(Movie.class);
-        EntityType<Movie> type = entityManager.getMetamodel().entity(Movie.class);
+        CriteriaQuery<MovieUI> cq = qb.createQuery(MovieUI.class);
+        Root<MovieUI> root = cq.from(MovieUI.class);
+        EntityType<MovieUI> type = entityManager.getMetamodel().entity(MovieUI.class);
 
         Path<String> path = root.get(type.getDeclaredSingularAttribute(field, String.class));
         Predicate condition = qb.like(path, "%" + searchTerm + "%");
 
         cq.where(condition);
-        TypedQuery<Movie> q = entityManager.createQuery(cq);
+        TypedQuery<MovieUI> q = entityManager.createQuery(cq);
         q.setMaxResults(maxResults);
         q.setFirstResult(firstResult);
         return q.getResultList();
