@@ -1,11 +1,10 @@
 package com.example.mediabase.podcasts;
 
-import com.example.mediabase.podcastsui.PodcastUI;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface PodcastRepository extends CrudRepository<PodcastUI, Long> {
+public interface PodcastRepository extends CrudRepository<Podcast, Long> {
 
-    Optional<PodcastUI> findById(Long id);
+    Optional<Podcast> findById(Long id);
 }

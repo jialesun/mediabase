@@ -62,9 +62,9 @@ public class ActionServlet extends HttpServlet {
             int rating = Integer.parseInt(request.getParameter("rating"));
             int year = Integer.parseInt(request.getParameter("year"));
 
-            MovieUI movie = new MovieUI(title, director, genre, rating, year);
+            MovieUI movieUI = new MovieUI(title, director, genre, rating, year);
 
-            movieClient.create(movie);
+            movieClient.create(movieUI);
             response.sendRedirect("moviefun");
             return;
 

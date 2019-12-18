@@ -20,8 +20,8 @@ public class MovieClient {
         this.moviesURL = moviesURL;
     }
 
-    public void create(MovieUI movie) {
-        restOperations.postForEntity(moviesURL, movie, MovieUI.class);
+    public void create(MovieUI movieUI) {
+        restOperations.postForEntity(moviesURL, movieUI, MovieUI.class);
     }
 
     public List<MovieUI> getAll() {

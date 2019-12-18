@@ -1,6 +1,5 @@
 package com.example.mediabase.movies;
 
-import com.example.mediabase.moviesui.MovieUI;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,15 +17,15 @@ public class MovieController {
     }
 
     @PostMapping
-    public ResponseEntity<MovieUI> create(@RequestBody MovieUI movie) {
+    public ResponseEntity<Movie> create(@RequestBody Movie movie) {
 
         moviesBean.addMovie(movie);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<MovieUI> delete(@PathVariable Long id) {
-        MovieUI doomed = moviesBean.find(id);
+    public ResponseEntity<Movie> delete(@PathVariable Long id) {
+        Movie doomed = moviesBean.find(id);
         if (doomed != null) moviesBean.deleteMovie(doomed);
         HttpStatus status = (doomed != null) ? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND;
         return new ResponseEntity<>(status);
@@ -42,7 +41,7 @@ public class MovieController {
     }
 
     @GetMapping()
-    public List<MovieUI> read(
+    public List<Movie> read(
             @RequestParam(value = "field", required = false) String field,
             @RequestParam(value = "key", required = false) String key,
             @RequestParam(value = "start", required = false) Integer start,
