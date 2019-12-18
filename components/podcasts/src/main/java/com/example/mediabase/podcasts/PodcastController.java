@@ -11,23 +11,23 @@ import java.util.Optional;
 @RequestMapping("/podcasts")
 public class PodcastController {
 
-    private PodcastRepository podcastsRepository;
+    private PodcastRepository podcastRepository;
 
     public PodcastController(PodcastRepository podcastRepository) {
-        this.podcastsRepository = podcastsRepository;
+        this.podcastRepository = podcastRepository;
     }
 
     @PostMapping
     public ResponseEntity<Podcast> create(@RequestBody Podcast podcast) {
 
-        podcastsRepository.save(podcast);
+        podcastRepository.save(podcast);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Podcast> delete(@PathVariable Long id) {
-        Optional<Podcast> doomed = podcastsRepository.findById(id);
-        if (doomed != null) podcastsRepository.delete(doomed.get());
+        Optional<Podcast> doomed = podcastRepository.findById(id);
+        if (doomed != null) podcastRepository.delete(doomed.get());
         HttpStatus status = (doomed != null) ? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND;
         return new ResponseEntity<>(status);
     }
