@@ -34,10 +34,10 @@ public class RootController {
     public String setupDatabase(Map<String, Object> model) {
 
         moviesInitialList.asList().forEach(movieClient::create);
-        model.put("com/example/mediabase/movies", movieClient.getAll());
+        model.put("movies", movieClient.getAll());
 
         podcastsInitialList.asList().forEach(podcastClient::create);
-        model.put("com/example/mediabase/podcasts", podcastClient.getAll());
+        model.put("podcasts", podcastClient.getAll());
 
 
         return "setup";
