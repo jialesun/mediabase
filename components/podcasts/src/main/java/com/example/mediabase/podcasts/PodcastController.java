@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -33,9 +33,8 @@ public class PodcastController {
     }
 
     @GetMapping()
-    public String allPodcasts(Map<String, Object> model) {
-
-        return "";
+    public List<Podcast> getAll(){
+        return (List<Podcast>) podcastRepository.findAll();
     }
 
 }
