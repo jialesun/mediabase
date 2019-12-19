@@ -1,6 +1,8 @@
 buildscript {
     ext {
         springBootVersion = "2.1.10.RELEASE"
+        SCSClientStartersVersion = "2.1.2.RELEASE"
+        SCVersion = "Greenwich.SR4"
     }
 
     repositories {
