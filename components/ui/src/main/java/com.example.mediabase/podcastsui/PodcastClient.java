@@ -1,6 +1,7 @@
 package com.example.mediabase.podcastsui;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
@@ -28,7 +29,9 @@ public class PodcastClient {
         restOperations.postForEntity(podcastURL, podcast, PodcastUI.class);
     }
 
-    @HystrixCommand(fallbackMethod="getAllFallback")
+    @HystrixCommand(fallbackMethod="getAllFallback",commandProperties = {
+            @HystrixProperty(name="execution.isolation.strategy", value="SEMAPHORE")
+    })
     public List<PodcastUI> getAll() {
         List<PodcastUI> read = restOperations.exchange(podcastURL, HttpMethod.GET, null, podcastListType).getBody();
         log.debug("Read {} podcasts from {}", read.size(), podcastURL);

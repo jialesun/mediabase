@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @EnableEurekaClient
-@SpringBootApplication
+@SpringBootApplication(exclude= {io.pivotal.spring.cloud.IssuerCheckConfiguration.class})
 public class PodcastMicroserviceApplication {
     public static void main(String... args) {
         SpringApplication.run(PodcastMicroserviceApplication.class, args);

@@ -11,11 +11,10 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestOperations;
-import org.springframework.web.client.RestTemplate;
 
 @EnableCircuitBreaker
 @EnableEurekaClient
-@SpringBootApplication
+@SpringBootApplication(exclude= {io.pivotal.spring.cloud.IssuerCheckConfiguration.class})
 public class Application {
 
 
@@ -29,11 +28,7 @@ public class Application {
         return new ServletRegistrationBean(actionServlet, "/moviefun/*");
     }
 
-    @LoadBalanced
-    @Bean
-    public RestOperations restOperations() {
-        return new RestTemplate();
-    }
+
 
     @Bean
     public MovieClient movieClient(RestOperations restOperations) {

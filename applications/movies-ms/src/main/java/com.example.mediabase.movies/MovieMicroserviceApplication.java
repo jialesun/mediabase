@@ -6,7 +6,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 
 @EnableEurekaClient
-@SpringBootApplication
+@SpringBootApplication(exclude= {io.pivotal.spring.cloud.IssuerCheckConfiguration.class})
 public class MovieMicroserviceApplication {
     public static void main(String... args) {
         SpringApplication.run(MovieMicroserviceApplication.class, args);
