@@ -2,7 +2,7 @@ apply from: "../../common.gradle"
 
 dependencies {
 
-    compile project(':components:ui')
+
     compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
     compile("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
     compile('commons-lang:commons-lang:2.4')

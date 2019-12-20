@@ -2,8 +2,9 @@ spring:
   mvc.view:
     prefix: /WEB-INF/
     suffix: .jsp
-application:
-  name: mediabase
+  application:
+    name: mediabase
+
 
 logging.level:
   root: WARN
